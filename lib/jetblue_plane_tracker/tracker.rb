@@ -4,15 +4,13 @@ module JetBluePlaneTracker
 		include HTTParty
 		base_uri "http://www.jetblue.com/flightstatus"
 
-		attr_accessor :params
+		def initialize()
 
-		def initialize(params={})
-			self.params = params
 		end
 		
-		def flights
-			data = get_data
-			flight_date = self.params.has_key?("date") ? options[:date] : Date.today
+		def flight_status(params={})
+			data = get_data(params)
+			flight_date = params.has_key?("date") ? options[:date] : Date.today
 			flights = []
 			legs = []
 			data['flights'].each do |flight|
@@ -27,12 +25,12 @@ module JetBluePlaneTracker
 			flights
 		end
 
-		alias_method :get_flights, :flights
+		alias_method :find_flight, :flight_status
 
 		private
 
-			def get_data
-				self.class.get("/FlightStatusData.aspx", query: self.params)
+			def get_data(params)
+				self.class.get("/FlightStatusData.aspx", query: params)
 			end
 
 	end
