@@ -53,7 +53,7 @@
           new(response["icao"], response["iata"], response["name"], response["location"], 
               response["country"], response["country_code"], response["longitude"], response["latitude"])
         else
-          raise responsse["error"]
+          raise response["error"]
         end
       end
 
