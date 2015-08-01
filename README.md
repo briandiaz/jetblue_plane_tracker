@@ -28,11 +28,11 @@ jbtracker = JetBluePlaneTracker::Tracker.new
 Get a flight status by the departure and arrival city and its date: 
 
 ```ruby
-flights = jbtracker.flight_status(origin: "SFO", destination: "JFK", date: "2015-31-07")
+flights = jbtracker.flight_status(origin: "SFO", destination: "JFK", date: "2015-07-31")
 ```
 Get a flight status by the flight number and its date: 
 ```ruby
-flights = jbtracker.flight_status(flight: 37, date: "2015-29-07")
+flights = jbtracker.flight_status(flight: 37, date: "2015-07-29")
 ```
 
 Print flights by:
@@ -50,7 +50,7 @@ flights.map { |flight| flight.to_json }
 
 ## Suggestions
 
-* Date Format is ```yyyy-dd-mm```
+* Date Format is ```yyyy-mm-dd```
 * Permited params are:
 	* origin
 	* destination
