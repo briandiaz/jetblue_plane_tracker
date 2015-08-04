@@ -49,7 +49,7 @@
       end
 
       def find(options={})
-        file = File.read('../data/airports.json')
+        file = File.read(File.expand_path('../../data/airports.json', __FILE__))
         data = JSON.parse(file)
         airport_data = data[options[:iata]]
         new(airport_data["iata"], airport_data["icao"], airport_data["name"], 
