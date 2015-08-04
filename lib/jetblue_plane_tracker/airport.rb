@@ -2,20 +2,19 @@
 
   class Airport
 
-    include HTTParty
-    base_uri "airport-data.com/api"
+    attr_accessor :iata, :icao, :name, :city, :country, :latitude, :longitude, :altitude, :timezone, :dst
 
-    attr_accessor :icao, :iata, :name, :location, :country, :country_code, :longitude, :latitude
-
-    def initialize(icao, iata, name, location, country, country_code, longitude, latitude)
-      self.icao           =   icao
+    def initialize(iata, icao, name, city, country, latitude, longitude, altitude, timezone, dst)
       self.iata           =   iata
+      self.icao           =   icao
       self.name           =   name
-      self.location       =   location
+      self.city           =   city
       self.country        =   country
-      self.country_code   =   country_code
       self.longitude      =   longitude
       self.latitude       =   latitude
+      self.altitude       =   altitude
+      self.timezone       =   timezone
+      self.dst            =   dst
     end
 
     def to_s
@@ -30,14 +29,16 @@
 
     def to_json
       {
-        "icao" => self.icao,
         "iata" => self.iata,
+        "icao" => self.icao,
         "name" => self.name,
-        "location" => self.location,
+        "city" => self.city,
         "country" => self.country,
-        "country_code" => self.country_code,
+        "latitude" => self.latitude,
         "longitude" => self.longitude,
-        "latitude" => self.latitude
+        "altitude" => self.altitude,
+        "timezone" => self.timezone,
+        "dst" => self.dst
       }.to_json
     end
 
@@ -48,14 +49,15 @@
       end
 
       def find(options={})
-        response = self.get("/ap_info.json", query: options)
-        if response["status"] == 200
-          new(response["icao"], response["iata"], response["name"], response["location"], 
-              response["country"], response["country_code"], response["longitude"], response["latitude"])
-        else
-          raise response["error"]
-        end
+        file = File.read('../data/airports.json')
+        data = JSON.parse(file)
+        airport_data = data[options[:iata]]
+        new(airport_data["iata"], airport_data["icao"], airport_data["name"], 
+          airport_data["city"], airport_data["country"], airport_data["latitude"], 
+          airport_data["longitude"], airport_data["altitude"], airport_data["timezone"], 
+          airport_data["dst"])
       end
+
 
     end
     
