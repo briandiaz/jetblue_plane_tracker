@@ -44,13 +44,8 @@ module JetBluePlaneTracker
 			progress = (current_datetime - actual_departure).to_f / (actual_arrival - actual_departure).to_f
 			
 			# Check if progress is minor than min progress or max progress
-			if progress < min_progress
-				min_progress
-			elsif progress > max_progress
-				max_progress
-			else
-				progress
-			end
+			progress = (progress < min_progress) ? min_progress : progress
+			progress = (progress > max_progress) ? max_progress : progress
 			
 			progress * 100
 		end
