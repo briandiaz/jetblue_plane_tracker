@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.test_files      = Dir["spec/**/*"]
   s.add_dependency('httparty', '~> 0.12.0')
   s.add_dependency('json', '~> 1.5')
+  s.add_dependency('activesupport')
 end

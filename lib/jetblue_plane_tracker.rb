@@ -1,5 +1,6 @@
 require 'json'
 require 'httparty'
+require 'active_support/time'
 require File.expand_path('../jetblue_plane_tracker/airport', __FILE__)
 require File.expand_path('../jetblue_plane_tracker/flight', __FILE__)
 require File.expand_path('../jetblue_plane_tracker/leg', __FILE__)

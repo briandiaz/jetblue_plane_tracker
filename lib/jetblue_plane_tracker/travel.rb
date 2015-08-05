@@ -5,8 +5,8 @@ module JetBluePlaneTracker
 		def initialize(airport, scheduled_takeoff, actual_takeoff, terminal, gate, temperature)
 			super()
 			self.airport = Airport.find(iata: Airport.parse_airport_iata(airport))
-			self.scheduled_takeoff = scheduled_takeoff
-			self.actual_takeoff = actual_takeoff
+			self.scheduled_takeoff = DateTime.parse(scheduled_takeoff)
+			self.actual_takeoff = DateTime.parse(actual_takeoff)
 			self.terminal = terminal
 			self.gate = gate
 			self.temperature = temperature
