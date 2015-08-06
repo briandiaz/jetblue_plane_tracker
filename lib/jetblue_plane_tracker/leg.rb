@@ -24,7 +24,7 @@ module JetBluePlaneTracker
 				"arrival" =>  self.arrival.to_json,
 				"status" => self.status,
 				"progress" => self.progress,
-				"current_location" => current_location
+				"current_location" => self.current_location
 			}.to_json
 		end
 

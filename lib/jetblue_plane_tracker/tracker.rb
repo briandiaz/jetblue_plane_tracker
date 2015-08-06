@@ -14,6 +14,7 @@ module JetBluePlaneTracker
 			flights = []
 			legs = []
 			data['flights'].each do |flight|
+				legs = []
 				flight['legs'].each do |leg|
 					lg = Leg.new(leg["flightNo"], flight_date,
 									Departure.parse(leg), Arrival.parse(leg), leg['flightStatus'])
