@@ -1,10 +1,6 @@
 module JetBluePlaneTracker
 	class Departure < Travel
 
-		def initialize(airport, scheduled_takeoff, actual_takeoff, terminal, gate, temperature)
-			super(airport, scheduled_takeoff, actual_takeoff, terminal, gate, temperature)
-		end
-	
 		class << self
 
 			def parse(leg)
