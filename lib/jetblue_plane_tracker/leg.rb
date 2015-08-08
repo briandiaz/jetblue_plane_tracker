@@ -16,18 +16,6 @@ module JetBluePlaneTracker
 			"##{number}\n#{departure}\n#{arrival}\n#{status}\n#{progress}"
 		end
 
-		def to_json
-			{
-				"number" => self.number,
-				"date" => self.date,
-				"departure" => self.departure.to_json,
-				"arrival" =>  self.arrival.to_json,
-				"status" => self.status,
-				"progress" => self.progress,
-				"current_location" => self.current_location
-			}.to_json
-		end
-
 		def flight_tracker_progress
 			min_progress = 0
 			max_progress = 1
@@ -50,21 +38,33 @@ module JetBluePlaneTracker
 			progress * 100
 		end
 
-		# To be tested in different coordinates
-		def current_location
-			departude_longitude = self.departure.airport.longitude.to_f
-			arrival_longitude = self.arrival.airport.longitude.to_f
-			current_progress = self.progress / 100
-			
-			current_latitude = self.arrival.airport.latitude
-			current_longitude = get_plane_longitude(departude_longitude, arrival_longitude, current_progress)
 
-			{latitude: current_latitude, longitude: current_longitude}
+		def current_location
+
+		    departure = self.departure.airport
+		    arrival = self.arrival.airport
+		    current_progress = self.progress/100
+
+		    latitude = get_plane_coordinate(departure.latitude, arrival.latitude, current_progress)
+		    longitude = get_plane_coordinate(departure.longitude, arrival.longitude, current_progress)
+
+		    {
+		        latitude: latitude,
+		        longitude: longitude
+		    }
 		end
 
 		private
-			def get_plane_longitude(departurelng, arrivallng, progress)
-				(progress > 0) ? ((arrivallng + ((1-progress)*arrivallng)) - progress) : departurelng
+			def get_plane_coordinate(coordinate_x, coordinate_y, progress)
+				new_coordinate = 0
+
+				if(coordinate_x != coordinate_y)
+			        new_coordinate = coordinate_x + progress * (coordinate_y - coordinate_x)
+			    else
+			        new_coordinate = coordinate_x
+			    end
+
+			    new_coordinate
 			end
 
 	end

@@ -21,7 +21,7 @@ module JetBluePlaneTracker
 				"origin" => self.origin.to_json,
 				"destination" => self.destination.to_json,
 				"legs" => self.legs.map{ |leg| leg.to_json }
-			}.to_json
+			}
 		end
 
 	end

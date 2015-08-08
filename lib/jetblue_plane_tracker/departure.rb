@@ -5,7 +5,6 @@ module JetBluePlaneTracker
 			super(airport, scheduled_takeoff, actual_takeoff, terminal, gate, temperature)
 		end
 	
-		
 		class << self
 
 			def parse(leg)

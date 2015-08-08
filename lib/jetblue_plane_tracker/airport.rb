@@ -10,8 +10,8 @@
       self.name           =   name
       self.city           =   city
       self.country        =   country
-      self.longitude      =   longitude
-      self.latitude       =   latitude
+      self.longitude      =   longitude.to_f
+      self.latitude       =   latitude.to_f
       self.altitude       =   altitude
       self.timezone       =   timezone
       self.dst            =   dst
@@ -29,17 +29,17 @@
 
     def to_json
       {
-        "iata" => self.iata,
-        "icao" => self.icao,
-        "name" => self.name,
-        "city" => self.city,
-        "country" => self.country,
-        "latitude" => self.latitude,
-        "longitude" => self.longitude,
-        "altitude" => self.altitude,
-        "timezone" => self.timezone,
-        "dst" => self.dst
-      }.to_json
+        iata: self.iata,
+        icao: self.icao,
+        name: self.name,
+        city: self.city,
+        country: self.country,
+        latitude: self.latitude,
+        longitude: self.longitude,
+        altitude: self.altitude,
+        timezone: self.timezone,
+        dst: self.dst
+      }
     end
 
     class << self

@@ -16,7 +16,6 @@ module JetBluePlaneTracker
 			"#{type}-> Airport: #{airport.name} Scheduled Take-Off: #{scheduled_takeoff} - Actual Take-Off: #{actual_takeoff} [Terminal: #{terminal}, Gate: #{gate}, Temperature: #{temperature}]"
 		end
 
-
 		def to_json
 			{
 				"airport" => self.airport.to_json,
@@ -25,7 +24,7 @@ module JetBluePlaneTracker
 				"terminal" => self.terminal,
 				"gate" => self.gate,
 				"temperature" => self.temperature
-			}.to_json
+			}
 		end
 
 		def type
