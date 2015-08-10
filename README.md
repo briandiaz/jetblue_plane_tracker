@@ -5,7 +5,7 @@ A Ruby wrapper for JetBlue flights status tracker.
 
 Install the gem via the CLI
 
-```
+```ruby
 	gem install jetblue_plane_tracker
 ```
 
@@ -34,20 +34,6 @@ Get a flight status by the flight number and its date:
 ```ruby
 flights = jbtracker.flight_status(flight: 37, date: "2015-07-29")
 ```
-
-Print flights by:
-```ruby
-flights.each { |flight| puts flight }
-```
-Print flights into json by:
-```ruby
-flights.each { |flight| puts flight.to_json }
-```
-Convert to JSON by:
-```ruby
-flights.map { |flight| flight.to_json }
-```
-
 ## Suggestions
 
 * Date Format is ```yyyy-mm-dd```
