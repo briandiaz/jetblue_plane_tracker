@@ -3,8 +3,8 @@ module JetBluePlaneTracker
 		attr_accessor :origin, :destination, :legs
 
 		def initialize(origin, destination, legs)
-			self.origin = Airport.find(iata: Airport.parse_airport_iata(origin))
-			self.destination = Airport.find(iata: Airport.parse_airport_iata(destination))
+			self.origin = Airport.find_by_iata(Airport.parse_airport_iata(origin))
+			self.destination = Airport.find_by_iata(Airport.parse_airport_iata(destination))
 			self.legs = legs
 		end
 
