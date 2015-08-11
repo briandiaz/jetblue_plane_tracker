@@ -49,15 +49,31 @@
       end
 
       def find(options={})
-        file = File.read(File.expand_path('../../data/airports.json', __FILE__))
-        data = JSON.parse(file)
+        data = get_json
         airport_data = data[options[:iata]]
-        new(airport_data["iata"], airport_data["icao"], airport_data["name"], 
-          airport_data["city"], airport_data["country"], airport_data["latitude"], 
-          airport_data["longitude"], airport_data["altitude"], airport_data["timezone"], 
-          airport_data["dst"])
+        new_object_instance(airport_data)
       end
 
+      def all
+        data = get_json
+        airports = []
+        data.each do |airport_data|
+          airports << new_object_instance(airport_data[1])
+        end
+        airports
+      end
+
+      def get_json
+        file = File.read(File.expand_path('../../data/airports.json', __FILE__))
+        JSON.parse(file)
+      end
+
+      def new_object_instance(airport_data)
+        new(airport_data["iata"], airport_data["icao"], airport_data["name"], 
+                              airport_data["city"], airport_data["country"], airport_data["latitude"], 
+                              airport_data["longitude"], airport_data["altitude"], airport_data["timezone"], 
+                              airport_data["dst"])
+      end
 
     end
     
